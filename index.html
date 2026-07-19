@@ -4,172 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的技术博客</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #faf9f7;
             --bg-card: #ffffff;
-            --bg-hover: #f5f3f0;
-            --text: #2d2a26;
-            --text-secondary: #6b6560;
-            --text-muted: #9a9590;
-            --accent: #c45c3e;
-            --accent-light: #e07a5f;
-            --accent-bg: #fdf2ef;
-            --border: #e8e4df;
-            --shadow: 0 2px 12px rgba(45,42,38,0.06);
-            --shadow-lg: 0 8px 32px rgba(45,42,38,0.10);
-            --radius: 16px;
-            --radius-sm: 10px;
+            --bg-hover: #f7f5f2;
+            --text: #1a1a1a;
+            --text-secondary: #5c5c5c;
+            --text-muted: #8a8a8a;
+            --accent: #d97706;
+            --accent-light: #f59e0b;
+            --accent-bg: #fef3c7;
+            --border: #e5e5e5;
+            --shadow: 0 1px 3px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", sans-serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-family: var(--font);
             background: var(--bg);
             color: var(--text);
-            line-height: 1.75;
+            line-height: 1.6;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Header */
         header {
-            background: var(--bg-card);
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             position: sticky; top: 0; z-index: 100;
-            backdrop-filter: blur(20px);
-            background: rgba(255,255,255,0.85);
         }
         .nav {
-            max-width: 800px; margin: 0 auto;
-            padding: 16px 24px;
+            max-width: 900px; margin: 0 auto;
+            padding: 14px 24px;
             display: flex; justify-content: space-between; align-items: center;
         }
         .logo {
-            font-size: 1.3rem; font-weight: 700;
-            color: var(--accent);
+            font-size: 1rem; font-weight: 600;
+            color: var(--text);
             text-decoration: none;
             display: flex; align-items: center; gap: 8px;
         }
-        .logo::before { content: "✦"; font-size: 1.1rem; }
+        .logo-icon {
+            width: 28px; height: 28px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 14px; font-weight: 700;
+        }
         .nav-btn {
             background: var(--accent);
             color: white; border: none;
-            padding: 8px 20px;
-            border-radius: 24px;
-            font-size: 0.9rem;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
-            font-weight: 500;
+            font-family: var(--font);
         }
-        .nav-btn:hover { background: var(--accent-light); transform: translateY(-1px); }
+        .nav-btn:hover { 
+            background: var(--accent-light); 
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(217,119,6,0.3);
+        }
 
         /* Main */
-        main { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
+        main { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
 
         /* Hero */
         .hero {
-            text-align: center;
-            padding: 60px 0 48px;
+            text-align: left;
+            padding: 40px 0 36px;
         }
         .hero h1 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             letter-spacing: -0.5px;
+            color: var(--text);
         }
         .hero p {
             color: var(--text-secondary);
-            font-size: 1.05rem;
-            max-width: 480px;
-            margin: 0 auto;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         /* Article List */
-        .article-list { display: flex; flex-direction: column; gap: 20px; }
+        .article-list { display: flex; flex-direction: column; gap: 12px; }
         .article-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 28px;
+            padding: 20px 24px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             position: relative;
-            overflow: hidden;
         }
         .article-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--accent-light);
+            border-color: #d4d4d4;
+            box-shadow: var(--shadow-md);
         }
-        .article-card::before {
-            content: "";
-            position: absolute; left: 0; top: 0; bottom: 0;
-            width: 4px;
-            background: var(--accent);
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        .article-card:hover::before { opacity: 1; }
         .article-meta {
-            display: flex; align-items: center; gap: 12px;
-            margin-bottom: 10px;
-            font-size: 0.82rem;
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
             color: var(--text-muted);
         }
         .article-tag {
             background: var(--accent-bg);
             color: var(--accent);
-            padding: 2px 10px;
-            border-radius: 12px;
+            padding: 2px 8px;
+            border-radius: 4px;
             font-size: 0.75rem;
             font-weight: 500;
         }
         .article-card h3 {
-            font-size: 1.25rem;
+            font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--text);
         }
         .article-card .summary {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 0.9rem;
+            line-height: 1.5;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
         .article-actions {
-            display: flex; gap: 12px;
-            margin-top: 16px;
+            display: flex; gap: 8px;
+            margin-top: 12px;
             opacity: 0;
             transition: opacity 0.2s;
         }
         .article-card:hover .article-actions { opacity: 1; }
         .action-btn {
-            font-size: 0.8rem;
-            padding: 4px 12px;
+            font-size: 0.78rem;
+            padding: 4px 10px;
             border-radius: 6px;
             border: 1px solid var(--border);
             background: var(--bg);
             color: var(--text-secondary);
             cursor: pointer;
             transition: all 0.15s;
+            font-family: var(--font);
         }
-        .action-btn:hover { background: var(--accent-bg); color: var(--accent); border-color: var(--accent-light); }
-        .action-btn.delete:hover { background: #fdf2f2; color: #c0392b; border-color: #e07a7a; }
+        .action-btn:hover { background: var(--bg-hover); color: var(--text); }
+        .action-btn.delete:hover { background: #fef2f2; color: #dc2626; border-color: #fca5a5; }
 
         .empty-state {
             text-align: center;
             padding: 80px 20px;
             color: var(--text-muted);
         }
-        .empty-state .icon { font-size: 3rem; margin-bottom: 16px; opacity: 0.5; }
+        .empty-state .icon { font-size: 2.5rem; margin-bottom: 12px; }
 
         /* Editor Modal */
         .modal-overlay {
             position: fixed; inset: 0;
-            background: rgba(45,42,38,0.35);
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
             z-index: 200;
             display: none;
             align-items: center;
@@ -179,39 +186,40 @@
         .modal-overlay.active { display: flex; }
         .modal {
             background: var(--bg-card);
-            border-radius: var(--radius);
-            width: 100%; max-width: 720px;
+            border-radius: var(--radius-lg);
+            width: 100%; max-width: 680px;
             max-height: 90vh;
             overflow: hidden;
             display: flex; flex-direction: column;
             box-shadow: var(--shadow-lg);
-            animation: modalIn 0.25s ease;
+            animation: modalIn 0.2s ease;
         }
         @keyframes modalIn {
-            from { opacity: 0; transform: translateY(20px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
         .modal-header {
-            padding: 24px 28px 0;
+            padding: 20px 24px 0;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .modal-header h2 { font-size: 1.3rem; font-weight: 600; }
+        .modal-header h2 { font-size: 1.1rem; font-weight: 600; }
         .modal-close {
             background: none; border: none;
-            font-size: 1.5rem; color: var(--text-muted);
+            font-size: 1.25rem; color: var(--text-muted);
             cursor: pointer; padding: 4px;
             line-height: 1;
+            transition: color 0.15s;
         }
         .modal-close:hover { color: var(--text); }
         .modal-body {
-            padding: 20px 28px;
+            padding: 20px 24px;
             overflow-y: auto;
             flex: 1;
         }
-        .form-group { margin-bottom: 18px; }
+        .form-group { margin-bottom: 16px; }
         .form-group label {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 500;
             color: var(--text-secondary);
             margin-bottom: 6px;
@@ -220,148 +228,146 @@
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 12px 14px;
-            border: 1.5px solid var(--border);
+            padding: 10px 12px;
+            border: 1px solid var(--border);
             border-radius: var(--radius-sm);
-            font-size: 0.95rem;
-            font-family: inherit;
+            font-size: 0.9rem;
+            font-family: var(--font);
             background: var(--bg);
             color: var(--text);
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-color 0.15s, box-shadow 0.15s;
         }
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: var(--accent-light);
+            border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-bg);
         }
         .form-group textarea {
-            min-height: 320px;
+            min-height: 280px;
             resize: vertical;
-            line-height: 1.8;
-            font-size: 0.92rem;
+            line-height: 1.7;
         }
-        .form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+        .form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
         .modal-footer {
-            padding: 16px 28px 24px;
-            display: flex; justify-content: flex-end; gap: 12px;
-            border-top: 1px solid var(--border);
+            padding: 16px 24px 20px;
+            display: flex; justify-content: flex-end; gap: 10px;
         }
         .btn {
-            padding: 10px 24px;
-            border-radius: 24px;
-            font-size: 0.9rem;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s;
             border: none;
+            font-family: var(--font);
         }
         .btn-primary { background: var(--accent); color: white; }
-        .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+        .btn-primary:hover { background: var(--accent-light); box-shadow: 0 2px 8px rgba(217,119,6,0.3); }
         .btn-secondary { background: var(--bg); color: var(--text-secondary); border: 1px solid var(--border); }
         .btn-secondary:hover { background: var(--bg-hover); }
 
         /* Article View */
         .article-view {
             background: var(--bg-card);
-            border-radius: var(--radius);
+            border-radius: var(--radius-lg);
             border: 1px solid var(--border);
-            padding: 48px;
+            padding: 40px;
             display: none;
         }
         .article-view.active { display: block; }
         .article-view-header {
-            margin-bottom: 32px;
-            padding-bottom: 24px;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
             border-bottom: 1px solid var(--border);
         }
         .article-view-header h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             line-height: 1.3;
         }
         .article-view-body {
-            font-size: 1rem;
-            line-height: 1.9;
+            font-size: 0.95rem;
+            line-height: 1.8;
             color: var(--text);
         }
-        .article-view-body p { margin-bottom: 1.2em; }
+        .article-view-body p { margin-bottom: 1em; }
         .article-view-body h2 {
-            font-size: 1.4rem;
-            margin: 1.8em 0 0.8em;
-            color: var(--accent);
+            font-size: 1.25rem;
+            margin: 1.6em 0 0.6em;
+            font-weight: 600;
         }
         .article-view-body h3 {
-            font-size: 1.15rem;
-            margin: 1.5em 0 0.6em;
-            color: var(--text);
+            font-size: 1.05rem;
+            margin: 1.4em 0 0.5em;
+            font-weight: 600;
         }
         .article-view-body ul, .article-view-body ol {
-            margin: 0 0 1.2em 1.5em;
+            margin: 0 0 1em 1.5em;
         }
-        .article-view-body li { margin-bottom: 0.4em; }
+        .article-view-body li { margin-bottom: 0.3em; }
         .article-view-body code {
-            background: #f0ede9;
-            padding: 2px 8px;
-            border-radius: 5px;
-            font-family: "SFMono-Regular", Consolas, monospace;
-            font-size: 0.88em;
-            color: var(--accent);
+            background: #f3f3f3;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "SF Mono", Consolas, monospace;
+            font-size: 0.85em;
         }
         .article-view-body pre {
-            background: #f5f3f0;
-            padding: 20px;
+            background: #f8f8f8;
+            padding: 16px;
             border-radius: var(--radius-sm);
             overflow-x: auto;
-            margin: 1.2em 0;
+            margin: 1em 0;
             border: 1px solid var(--border);
         }
         .article-view-body pre code {
             background: none;
             padding: 0;
-            color: var(--text);
         }
         .back-btn {
             display: inline-flex; align-items: center; gap: 6px;
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: color 0.15s;
         }
-        .back-btn:hover { color: var(--accent); }
+        .back-btn:hover { color: var(--text); }
 
         /* Toast */
         .toast {
-            position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(100px);
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
             background: var(--text); color: white;
-            padding: 12px 28px;
-            border-radius: 24px;
-            font-size: 0.9rem;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-size: 0.85rem;
             z-index: 300;
             opacity: 0;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-lg);
+            transition: all 0.25s ease;
         }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         @media (max-width: 640px) {
-            .hero h1 { font-size: 1.6rem; }
+            .hero h1 { font-size: 1.5rem; }
             .article-view { padding: 24px; }
             .form-row { grid-template-columns: 1fr; }
-            .article-card { padding: 20px; }
+            .article-card { padding: 16px; }
         }
     </style>
-<base target="_blank">
 </head>
 <body>
     <header>
         <nav class="nav">
-            <a href="#" class="logo" onclick="showList()">我的技术博客</a>
-            <button class="nav-btn" onclick="openEditor()">+ 写文章</button>
+            <a href="#" class="logo" onclick="showList()">
+                <div class="logo-icon">S</div>
+                <span>StonePumpkins</span>
+            </a>
+            <button class="nav-btn" onclick="openEditor()">+ 新建</button>
         </nav>
     </header>
 
@@ -369,15 +375,15 @@
         <!-- List View -->
         <div id="listView">
             <div class="hero">
-                <h1>记录思考，沉淀技术</h1>
-                <p>从 minimind-o 复现到 Kimi-3 架构分析，写给自己看。</p>
+                <h1>我的技术博客</h1>
+                <p>记录思考，沉淀技术</p>
             </div>
             <div class="article-list" id="articleList"></div>
         </div>
 
         <!-- Article View -->
         <div id="articleView" class="article-view">
-            <a class="back-btn" onclick="showList()">← 返回列表</a>
+            <a class="back-btn" onclick="showList()">← 返回</a>
             <div class="article-view-header">
                 <div class="article-meta" id="viewMeta"></div>
                 <h1 id="viewTitle"></h1>
@@ -390,14 +396,14 @@
     <div class="modal-overlay" id="editorModal">
         <div class="modal">
             <div class="modal-header">
-                <h2 id="editorTitle">写文章</h2>
+                <h2 id="editorTitle">新建文章</h2>
                 <button class="modal-close" onclick="closeEditor()">×</button>
             </div>
             <div class="modal-body">
                 <div class="form-row">
                     <div class="form-group">
                         <label>标题</label>
-                        <input type="text" id="inputTitle" placeholder="给文章起个标题...">
+                        <input type="text" id="inputTitle" placeholder="输入标题...">
                     </div>
                     <div class="form-group">
                         <label>标签</label>
@@ -412,18 +418,11 @@
                 </div>
                 <div class="form-group">
                     <label>摘要（可选）</label>
-                    <input type="text" id="inputSummary" placeholder="简短描述文章内容...">
+                    <input type="text" id="inputSummary" placeholder="简短描述...">
                 </div>
                 <div class="form-group">
-                    <label>正文（支持 Markdown 语法）</label>
-                    <textarea id="inputBody" placeholder="开始写作...
-
-支持简单 Markdown：
-# 一级标题
-## 二级标题
-**粗体**
-`代码`
-- 列表项"></textarea>
+                    <label>正文</label>
+                    <textarea id="inputBody" placeholder="开始写作...&#10;&#10;支持 Markdown 语法"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -436,12 +435,10 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        // Storage
         const STORAGE_KEY = 'my_tech_blog_articles';
         let articles = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
         let editingId = null;
 
-        // Demo data
         if (articles.length === 0) {
             articles = [
                 {
@@ -497,18 +494,16 @@ Talker 用 MTP 同时预测 8 层 Mimi codebook，维度别太小，384/512 维�
             localStorage.setItem(STORAGE_KEY, JSON.stringify(articles));
         }
 
-        // Render list
         function renderList() {
             const list = document.getElementById('articleList');
             if (articles.length === 0) {
                 list.innerHTML = `
                     <div class="empty-state">
-                        <div class="icon">📝</div>
-                        <p>还没有文章，点击右上角"写文章"开始吧</p>
+                        <div class="icon">✦</div>
+                        <p>还没有文章，点击右上角"新建"开始吧</p>
                     </div>`;
                 return;
             }
-            // Sort by date desc
             const sorted = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
             list.innerHTML = sorted.map(a => `
                 <div class="article-card" onclick="viewArticle('${a.id}')">
@@ -526,7 +521,6 @@ Talker 用 MTP 同时预测 8 层 Mimi codebook，维度别太小，384/512 维�
             `).join('');
         }
 
-        // Simple Markdown parser
         function parseMarkdown(text) {
             return text
                 .replace(/^### (.*$)/gim, '<h3>$1</h3>')
@@ -535,11 +529,9 @@ Talker 用 MTP 同时预测 8 层 Mimi codebook，维度别太小，384/512 维�
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/`([^`]+)`/g, '<code>$1</code>')
                 .replace(/^\- (.*$)/gim, '<li>$1</li>')
-                .replace(/(<li>.*<\/li>
-?)+/g, '<ul>$&</ul>')
+                .replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>')
                 .replace(/<\/ul>\s*<ul>/g, '')
-                .replace(/
-/g, '<br>');
+                .replace(/\n/g, '<br>');
         }
 
         function escapeHtml(text) {
@@ -548,7 +540,6 @@ Talker 用 MTP 同时预测 8 层 Mimi codebook，维度别太小，384/512 维�
             return div.innerHTML;
         }
 
-        // View article
         function viewArticle(id) {
             const a = articles.find(x => x.id === id);
             if (!a) return;
@@ -568,10 +559,9 @@ Talker 用 MTP 同时预测 8 层 Mimi codebook，维度别太小，384/512 维�
             document.getElementById('articleView').classList.remove('active');
         }
 
-        // Editor
         function openEditor() {
             editingId = null;
-            document.getElementById('editorTitle').textContent = '写文章';
+            document.getElementById('editorTitle').textContent = '新建文章';
             document.getElementById('inputTitle').value = '';
             document.getElementById('inputTag').value = '架构分析';
             document.getElementById('inputSummary').value = '';
@@ -640,12 +630,10 @@ Talker 用 MTP 同时预测 8 层 Mimi codebook，维度别太小，384/512 维�
             setTimeout(() => t.classList.remove('show'), 2500);
         }
 
-        // Close modal on overlay click
         document.getElementById('editorModal').addEventListener('click', function(e) {
             if (e.target === this) closeEditor();
         });
 
-        // Init
         renderList();
     </script>
 </body>
