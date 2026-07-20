@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Hello StonePumpkins",
+    "date": "2026-07-20",
+    "category": "Life",
+    "description": "My first blog post",
+    "file": "hello-world.md",
+    "words": 12
+  },
+  {
+    "title": "Kimi-3 架构思考：2.8T MoE 的设计哲学",
+    "date": "2026-07-19",
+    "category": "架构分析",
+    "description": "从 K2 到 K3，Moonshot 如何在一年内将参数规模从 1T 推至 2.8T，同时保持 32B 激活？",
+    "file": "kimi3-architecture.md",
+    "words": 118
+  },
+  {
+    "title": "MiniMind-O 复现：0.1B Omni 模型的踩坑记录",
+    "date": "2026-07-18",
+    "category": "复现笔记",
+    "description": "从 SigLIP2 + SenseVoice 编码器到 Mimi 音频解码，单卡 3090 跑通全模态链路。",
+    "file": "minimind-o-reproduction.md",
+    "words": 150
+  }
+]

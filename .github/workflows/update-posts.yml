@@ -1,0 +1,74 @@
+name: Update blog index
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'posts/**'
+      - 'posts.json'
+      - '.github/workflows/update-posts.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate posts index
+        run: |
+          python3 - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          posts_dir = Path('posts')
+          metadata = []
+
+          for path in sorted(posts_dir.glob('*.md')):
+              text = path.read_text(encoding='utf-8')
+              frontmatter = {}
+              if text.startswith('---'):
+                  parts = text.split('---', 2)
+                  if len(parts) >= 3:
+                      for line in parts[1].splitlines():
+                          line = line.strip()
+                          if not line:
+                              continue
+                          if ':' in line:
+                              key, value = line.split(':', 1)
+                              frontmatter[key.strip()] = value.strip().strip('"\'')
+              content = text.split('---', 2)[-1] if text.startswith('---') else text
+              words = len(re.findall(r'\b\w+\b', content))
+              item = {
+                  'title': frontmatter.get('title', path.stem.replace('-', ' ').title()),
+                  'date': frontmatter.get('date', ''),
+                  'category': frontmatter.get('category') or frontmatter.get('tag') or 'Notes',
+                  'description': frontmatter.get('description') or frontmatter.get('summary') or '',
+                  'file': path.name,
+                  'words': words,
+              }
+              metadata.append(item)
+
+          metadata.sort(key=lambda x: x.get('date', ''), reverse=True)
+          Path('posts.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+
+      - name: Commit updated posts index
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add posts.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update posts index"
+            git push
+          fi
