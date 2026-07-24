@@ -367,7 +367,7 @@ color:var(--text-muted);
 <header class="navbar container">
 <div class="nav-wrapper">
 <a class="logo" href="#">
-<div class="logo-icon">🎃</div>
+<div class="logo-icon"></div>
 StonePumpkins
 </a>
 <nav class="nav-links">
@@ -393,15 +393,15 @@ StonePumpkins
 </div>
 </section>
 
-<section class="section container">
-<div class="feature-card">
+<section class="section container" id="featured-section" style="display:none;">
+<div class="feature-card" id="featured-card" onclick="openPost(featuredPost.file)" style="cursor:pointer;">
 <div>
 <div class="feature-tag">FEATURED</div>
-<h2>Exploring Modern AI Systems</h2>
-<p>Deep dives into large language models, architectures, training methods and experiments.</p>
+<h2 id="featured-title"></h2>
+<p id="featured-desc"></p>
 <div class="feature-meta">
-<span>AI Research</span>
-<span>10 min read</span>
+<span id="featured-category"></span>
+<span id="featured-date"></span>
 </div>
 </div>
 <div class="feature-image">🧠</div>
@@ -637,6 +637,7 @@ const BLOG_CONFIG = {
 let POSTS = [];
 let CURRENT_FILTER = "all";
 let observer = null;
+let featuredPost = null;
 
 function initObserver(){
   if(observer) observer.disconnect();
@@ -673,12 +674,27 @@ async function loadPosts(){
     if(!response.ok) throw new Error("Cannot load posts");
     POSTS = await response.json();
     POSTS.sort((a, b) => new Date(b.date) - new Date(a.date));
+    renderFeatured();
     renderPosts(POSTS);
   } catch(error){
     console.error(error);
     container.innerHTML = `<div class="post-card"><h3>Welcome to StonePumpkins</h3><p>No articles found yet. Add markdown files into /posts</p></div>`;
     initObserver();
   }
+}
+
+function renderFeatured(){
+  const section = document.getElementById('featured-section');
+  featuredPost = POSTS.find(p => p.featured);
+  if(!featuredPost){
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = 'block';
+  document.getElementById('featured-title').textContent = featuredPost.title;
+  document.getElementById('featured-desc').textContent = featuredPost.description || '';
+  document.getElementById('featured-category').textContent = featuredPost.category || 'Notes';
+  document.getElementById('featured-date').textContent = formatDate(featuredPost.date);
 }
 
 function renderPosts(posts){

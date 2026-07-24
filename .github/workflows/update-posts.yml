@@ -47,6 +47,7 @@ jobs:
                               frontmatter[key.strip()] = value.strip().strip('"\'')
               content = text.split('---', 2)[-1] if text.startswith('---') else text
               words = len(re.findall(r'\b\w+\b', content))
+              featured = frontmatter.get('featured', '').lower() in ('true', 'yes', '1')
               item = {
                   'title': frontmatter.get('title', path.stem.replace('-', ' ').title()),
                   'date': frontmatter.get('date', ''),
@@ -54,10 +55,23 @@ jobs:
                   'description': frontmatter.get('description') or frontmatter.get('summary') or '',
                   'file': path.name,
                   'words': words,
+                  'featured': featured,
               }
               metadata.append(item)
 
           metadata.sort(key=lambda x: x.get('date', ''), reverse=True)
+
+          # Ensure only one featured post (keep the newest if multiple)
+          featured_count = sum(1 for m in metadata if m.get('featured'))
+          if featured_count > 1:
+              found_first = False
+              for m in metadata:
+                  if m.get('featured'):
+                      if found_first:
+                          m['featured'] = False
+                      else:
+                          found_first = True
+
           Path('posts.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
           PY
 
