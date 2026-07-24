@@ -8,7 +8,7 @@ featured: true
 
 ### 1.训练流程概述
 
-![MiniMind-V 架构概览](images/minimind-v-architecture.png)
+![MiniMind-V 架构概览](posts/images/minimind-v-architecture.png)
 
 > 以上是minimind-v的结构框架与实现流程，在本次训练中将MoE=false进行训练，所以训练了个Dense model。
 > 在训练llm中，主要训练部分是在k layers transformer 而在本次vision model训练中，要基于一个llm底座进行训练，训练主流分为两个部分：
